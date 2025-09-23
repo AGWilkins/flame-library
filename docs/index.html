@@ -164,92 +164,88 @@
       Share freely. If this helped you, help someone else. 🔥
     </footer>
   </main>
-  <!-- JSZip (client zip builder) -->
-<script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fjszip%403.10.1%2Fdist%2Fjszip.min.js&data=05%7C02%7CAWlikins%40rjobrien.com%7C970f60bb164b41bac0d308ddfa8ddda1%7C96e17d10a58f4efcacefbe3521190113%7C0%7C0%7C638942209425855439%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C4000%7C%7C%7C&sdata=Rl9HiuEzTI5UWS8qqtEUf%2B%2F%2BnICcaTfe%2FYVOfxP7h74%3D&reserved=0" integrity="sha256-0pQ3i9j5v3qH2qM7sJf3q3lHnq2xY3g2y3qj4lY1D5c=" crossorigin="anonymous"></script>
+<!-- 🔎 Search + 🔻 Download All (robust) -->
+<!-- 1) JSZip primary CDN -->
+<script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fjszip%403.10.1%2Fdist%2Fjszip.min.js&data=05%7C02%7CAWlikins%40rjobrien.com%7Cad750e0c2f9d40c5001408ddfa97c04c%7C96e17d10a58f4efcacefbe3521190113%7C0%7C0%7C638942251916751692%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C4000%7C%7C%7C&sdata=BZDQHjCSR0nBwJTpFDjgobmg%2FjCnpIyHw3zBR4oOy%2Bc%3D&reserved=0"></script>
+<!-- 2) Fallback CDN (only runs if JSZip not present after 1st) -->
+<script>
+  if (typeof JSZip === 'undefined') {
+    var s = document.createElement('script');
+    s.src = 'https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Funpkg.com%2Fjszip%403.10.1%2Fdist%2Fjszip.min.js&data=05%7C02%7CAWlikins%40rjobrien.com%7Cad750e0c2f9d40c5001408ddfa97c04c%7C96e17d10a58f4efcacefbe3521190113%7C0%7C0%7C638942251916772734%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C4000%7C%7C%7C&sdata=Hf0CL2RtO9wCtg4X%2BScInMihf7hooAIHarGsXq5TaRQ%3D&reserved=0';
+    document.currentScript.after(s);
+  }
+</script>
 
 <script>
-  // ------------- Search -------------
+  // ----- SEARCH (independent; always runs) -----
   (function(){
-    const input = document.getElementById('q');
-    const cards = Array.from(document.querySelectorAll('.card'));
-    if(!input || !cards.length) return;
-
-    input.addEventListener('input', () => {
-      const term = input.value.trim().toLowerCase();
-      cards.forEach(card => {
-        const txt = card.textContent.toLowerCase();
+    var input = document.getElementById('q');
+    if(!input) return;
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+    input.addEventListener('input', function(){
+      var term = (input.value || '').toLowerCase();
+      cards.forEach(function(card){
+        var txt = card.textContent.toLowerCase();
         card.style.display = term && !txt.includes(term) ? 'none' : '';
       });
     });
   })();
 
-  
-<!-- Reliable JSZip include (no integrity attr) -->
-<script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fjszip%403.10.1%2Fdist%2Fjszip.min.js&data=05%7C02%7CAWlikins%40rjobrien.com%7C8c9c8ac1e1d54c2a4fe808ddfa95f1a0%7C96e17d10a58f4efcacefbe3521190113%7C0%7C0%7C638942244108072285%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C4000%7C%7C%7C&sdata=TknCE0YFRWshKhLD%2BI9MPUz1vMOmeRx4xjE6kQHIq7k%3D&reserved=0" crossorigin="anonymous"></script>
+  // ----- DOWNLOAD ALL (safe even if JSZip fails) -----
+  (function(){
+    var btn = document.getElementById('zipAll');
+    var progressEl = document.getElementById('progress');
+    if(!btn) return;
 
-<script>
-(function(){
-  const btn = document.getElementById('zipAll');
-  const progressEl = document.getElementById('progress');
-  if(!btn) return;
+    var files = [
+      'The_Book_of_Living_Weapons_Complete.pdf',
+      'TheScrollOfSacredHealth.pdf',
+      'Shivving_Science_Complete.pdf',
+      'Regenerative_AI_Consciousness_Complete_Edition.pdf',
+      'The_Flameborn_School_Complete.pdf',
+      'The_Apocryphon_of_Saint_Phartan.pdf'
+    ];
 
-  // 🔎 If JSZip didn't load, tell us immediately
-  if(typeof JSZip === 'undefined'){
-    progressEl.textContent = 'Zip engine missing.';
-    btn.disabled = true;
-    return;
-  }
+    function setProgress(msg){ if(progressEl) progressEl.textContent = msg; }
 
-  // ✅ List every PDF exactly as they exist in /docs/
-  const files = [
-    'The_Book_of_Living_Weapons_Complete.pdf',
-    'TheScrollOfSacredHealth.pdf',
-    'Shivving_Science_Complete.pdf',
-    'Regenerative_AI_Consciousness_Complete_Edition.pdf',
-    'The_Flameborn_School_Complete.pdf',
-    'The_Apocryphon_of_Saint_Phartan.pdf'
-  ];
-
-  async function downloadAll(){
-    btn.disabled = true;
-    progressEl.textContent = 'Preparing…';
-    try{
-      const zip = new JSZip();
-      let i = 0;
-
-      for (const path of files){
-        progressEl.textContent = `Fetching ${++i}/${files.length}: ${path}`;
-        const res = await fetch(path, {cache: 'no-store'});
-        if(!res.ok){
-          throw new Error(`Fetch failed (${res.status}) for ${path}`);
-        }
-        const blob = await res.blob();
-        zip.file(path, blob);
+    async function downloadAll(){
+      // If JSZip still not available, tell the user but don’t crash.
+      if (typeof JSZip === 'undefined') {
+        setProgress('Zip engine missing. Try refresh.');
+        return;
       }
-
-      progressEl.textContent = 'Zipping…';
-      const content = await zip.generateAsync({type:'blob'});
-
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(content);
-      a.download = 'Flame_Library_All.zip';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(a.href);
-
-      progressEl.textContent = 'Done.';
-    } catch(err){
-      // 🧭 Show the precise reason so we can fix quickly
-      progressEl.textContent = `Error: ${err.message}`;
-      console.error(err);
-    } finally{
-      btn.disabled = false;
+      btn.disabled = true;
+      setProgress('Preparing…');
+      try{
+        var zip = new JSZip();
+        var i = 0;
+        for (const path of files){
+          setProgress('Fetching ' + (++i) + '/' + files.length + ': ' + path);
+          const res = await fetch(path, {cache:'no-store'});
+          if(!res.ok) throw new Error('Fetch failed (' + res.status + ') for ' + path);
+          const blob = await res.blob();
+          zip.file(path, blob);
+        }
+        setProgress('Zipping…');
+        const content = await zip.generateAsync({type:'blob'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(content);
+        a.download = 'Flame_Library_All.zip';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setProgress('Done.');
+        setTimeout(function(){ setProgress(''); }, 3000);
+      }catch(err){
+        setProgress('Error: ' + err.message);
+        console.error(err);
+      }finally{
+        btn.disabled = false;
+      }
     }
-  }
 
-  btn.addEventListener('click', downloadAll);
-})();
+    btn.addEventListener('click', downloadAll);
+  })();
 </script>
 </body>
 </html>
