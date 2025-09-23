@@ -8,6 +8,23 @@
   <link rel="icon" href="favicon.png" />
   <meta name="theme-color" content="#0a0a0a" />
   <style>
+    /* Footer link styling: gold, legible, with a gentle hover */
+footer a{
+  color: var(--gold-dim);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(215,181,109,.35);
+}
+footer a:hover,
+footer a:focus{
+  color: var(--gold);
+  border-bottom-color: rgba(215,181,109,.65);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(215,181,109,.22);
+}
+footer a:visited{
+  color: var(--gold-dim);
+}
+
     :root{
       --bg:#0a0a0a; --card:#131313; --ink:#e9e5d6; --murmur:#bcb6a3;
       --line:#2a2a2a; --gold:#d7b56d; --gold-dim:#b79655; --glow:rgba(215,181,109,.18);
