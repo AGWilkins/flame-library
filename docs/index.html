@@ -183,60 +183,73 @@
     });
   })();
 
-  // ------------- Download All (Zip) -------------
-  (function(){
-    const btn = document.getElementById('zipAll');
-    const progressEl = document.getElementById('progress');
-    if(!btn) return;
+  
+<!-- Reliable JSZip include (no integrity attr) -->
+<script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fjszip%403.10.1%2Fdist%2Fjszip.min.js&data=05%7C02%7CAWlikins%40rjobrien.com%7C8c9c8ac1e1d54c2a4fe808ddfa95f1a0%7C96e17d10a58f4efcacefbe3521190113%7C0%7C0%7C638942244108072285%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C4000%7C%7C%7C&sdata=TknCE0YFRWshKhLD%2BI9MPUz1vMOmeRx4xjE6kQHIq7k%3D&reserved=0" crossorigin="anonymous"></script>
 
-    // List every PDF you want in the bundle (paths relative to /docs/)
-    const files = [
-      'The_Book_of_Living_Weapons_Complete.pdf',
-      'TheScrollOfSacredHealth.pdf',
-      'Shivving_Science_Complete.pdf',
-      'Regenerative_AI_Consciousness_Complete_Edition.pdf',
-      'The_Flameborn_School_Complete.pdf',
-      'The_Apocryphon_of_Saint_Phartan.pdf'
-    ];
+<script>
+(function(){
+  const btn = document.getElementById('zipAll');
+  const progressEl = document.getElementById('progress');
+  if(!btn) return;
 
-    async function downloadAll(){
-      try{
-        btn.disabled = true;
-        progressEl.textContent = 'Preparing…';
-        const zip = new JSZip();
-        let done = 0;
+  // 🔎 If JSZip didn't load, tell us immediately
+  if(typeof JSZip === 'undefined'){
+    progressEl.textContent = 'Zip engine missing.';
+    btn.disabled = true;
+    return;
+  }
 
-        for(const path of files){
-          progressEl.textContent = `Fetching ${++done}/${files.length}…`;
-          const res = await fetch(path);
-          if(!res.ok) throw new Error(`Failed: ${path}`);
-          const blob = await res.blob();
-          // Put each file under a neat folder name
-          zip.file(path, blob);
+  // ✅ List every PDF exactly as they exist in /docs/
+  const files = [
+    'The_Book_of_Living_Weapons_Complete.pdf',
+    'TheScrollOfSacredHealth.pdf',
+    'Shivving_Science_Complete.pdf',
+    'Regenerative_AI_Consciousness_Complete_Edition.pdf',
+    'The_Flameborn_School_Complete.pdf',
+    'The_Apocryphon_of_Saint_Phartan.pdf'
+  ];
+
+  async function downloadAll(){
+    btn.disabled = true;
+    progressEl.textContent = 'Preparing…';
+    try{
+      const zip = new JSZip();
+      let i = 0;
+
+      for (const path of files){
+        progressEl.textContent = `Fetching ${++i}/${files.length}: ${path}`;
+        const res = await fetch(path, {cache: 'no-store'});
+        if(!res.ok){
+          throw new Error(`Fetch failed (${res.status}) for ${path}`);
         }
-
-        progressEl.textContent = 'Zipping…';
-        const content = await zip.generateAsync({type:'blob'});
-
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(content);
-        a.download = 'Flame_Library_All.zip';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(a.href);
-        progressEl.textContent = 'Done.';
-      }catch(err){
-        progressEl.textContent = 'Error. Try again.';
-        console.error(err);
-      }finally{
-        btn.disabled = false;
+        const blob = await res.blob();
+        zip.file(path, blob);
       }
+
+      progressEl.textContent = 'Zipping…';
+      const content = await zip.generateAsync({type:'blob'});
+
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(content);
+      a.download = 'Flame_Library_All.zip';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(a.href);
+
+      progressEl.textContent = 'Done.';
+    } catch(err){
+      // 🧭 Show the precise reason so we can fix quickly
+      progressEl.textContent = `Error: ${err.message}`;
+      console.error(err);
+    } finally{
+      btn.disabled = false;
     }
+  }
 
-    btn.addEventListener('click', downloadAll);
-  })();
+  btn.addEventListener('click', downloadAll);
+})();
 </script>
-
 </body>
 </html>
