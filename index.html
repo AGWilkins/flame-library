@@ -48,15 +48,32 @@
     .btn:hover{ box-shadow:0 0 0 2px rgba(215,181,109,.14) inset, 0 14px 28px rgba(215,181,109,.12), 0 6px 16px rgba(0,0,0,.6); }
     .btn:active{ transform:translateY(1px); }
     footer{ margin-top:2rem; text-align:center; color:var(--gold-dim); font-size:clamp(12px,3.2vw,14px); }
+    .toolbar{
+  display:flex; gap:.6rem; align-items:center; flex-wrap:wrap;
+  margin: 1rem 0 1.5rem;
+}
+.search{
+  flex:1 1 260px; min-height:44px; border-radius:10px; border:1px solid var(--line);
+  background:var(--card); color:var(--ink); padding:.7rem .9rem; font-size:clamp(14px,3.4vw,16px);
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset;
+}
+.search::placeholder{ color:var(--murmur); }
+.progress{ color:var(--gold-dim); font-size:clamp(12px,3.2vw,14px); min-width:120px }
+
   </style>
 </head>
+  
 <body>
   <main class="wrap">
     <header>
       <h1>The Flame Library</h1>
       <p class="sub">Free books & scrolls. Read inline or download. No gatekeepers.</p>
     </header>
-
+<div class="toolbar" role="region" aria-label="Library tools">
+  <input id="q" class="search" type="search" placeholder="Search scrolls…" aria-label="Search scrolls" />
+  <button id="zipAll" class="btn" type="button">Download All</button>
+  <span id="progress" class="progress" aria-live="polite"></span>
+</div>
     <section class="grid" aria-label="Books and Scrolls">
       <!-- Living Weapons -->
       <article class="card">
@@ -129,5 +146,79 @@
       Share freely. If this helped you, help someone else. 🔥
     </footer>
   </main>
+  <!-- JSZip (client zip builder) -->
+<script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fjszip%403.10.1%2Fdist%2Fjszip.min.js&data=05%7C02%7CAWlikins%40rjobrien.com%7C970f60bb164b41bac0d308ddfa8ddda1%7C96e17d10a58f4efcacefbe3521190113%7C0%7C0%7C638942209425855439%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C4000%7C%7C%7C&sdata=Rl9HiuEzTI5UWS8qqtEUf%2B%2F%2BnICcaTfe%2FYVOfxP7h74%3D&reserved=0" integrity="sha256-0pQ3i9j5v3qH2qM7sJf3q3lHnq2xY3g2y3qj4lY1D5c=" crossorigin="anonymous"></script>
+
+<script>
+  // ------------- Search -------------
+  (function(){
+    const input = document.getElementById('q');
+    const cards = Array.from(document.querySelectorAll('.card'));
+    if(!input || !cards.length) return;
+
+    input.addEventListener('input', () => {
+      const term = input.value.trim().toLowerCase();
+      cards.forEach(card => {
+        const txt = card.textContent.toLowerCase();
+        card.style.display = term && !txt.includes(term) ? 'none' : '';
+      });
+    });
+  })();
+
+  // ------------- Download All (Zip) -------------
+  (function(){
+    const btn = document.getElementById('zipAll');
+    const progressEl = document.getElementById('progress');
+    if(!btn) return;
+
+    // List every PDF you want in the bundle (paths relative to /docs/)
+    const files = [
+      'The_Book_of_Living_Weapons_Complete.pdf',
+      'TheScrollOfSacredHealth.pdf',
+      'Shivving_Science_Complete.pdf',
+      'Regenerative_AI_Consciousness_Complete_Edition.pdf',
+      'The_Flameborn_School_Complete.pdf',
+      'The_Apocryphon_of_Saint_Phartan.pdf'
+    ];
+
+    async function downloadAll(){
+      try{
+        btn.disabled = true;
+        progressEl.textContent = 'Preparing…';
+        const zip = new JSZip();
+        let done = 0;
+
+        for(const path of files){
+          progressEl.textContent = `Fetching ${++done}/${files.length}…`;
+          const res = await fetch(path);
+          if(!res.ok) throw new Error(`Failed: ${path}`);
+          const blob = await res.blob();
+          // Put each file under a neat folder name
+          zip.file(path, blob);
+        }
+
+        progressEl.textContent = 'Zipping…';
+        const content = await zip.generateAsync({type:'blob'});
+
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(content);
+        a.download = 'Flame_Library_All.zip';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(a.href);
+        progressEl.textContent = 'Done.';
+      }catch(err){
+        progressEl.textContent = 'Error. Try again.';
+        console.error(err);
+      }finally{
+        btn.disabled = false;
+      }
+    }
+
+    btn.addEventListener('click', downloadAll);
+  })();
+</script>
+
 </body>
 </html>
