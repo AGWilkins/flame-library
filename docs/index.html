@@ -254,17 +254,18 @@ footer a:visited{
     </footer>
   </main>
 <!-- 🔎 Search + 🔻 Download All (robust) -->
+
 <!-- 1) JSZip primary CDN -->
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" integrity="sha384-2uX1s2G3l9T0xvS6bJ3l6Zz5Q5d0f7k5m3+9U0QJtG5MZpQXKXrH5Yf+e6d7aJQW" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 
 <!-- 2) Fallback CDN (only runs if JSZip not present after 1st) -->
+
 <script>
-  if (typeof JSZip === 'undefined') {
-    var s = document.createElement('script');
-    s.src = 'https://unpkg.com/jszip@3.10.1/dist/jszip.min.js';
-    document.currentScript.after(s);
-  }
-</script>
+
+(function(){
 
   if (typeof JSZip === 'undefined') {
 
@@ -272,88 +273,158 @@ footer a:visited{
 
     s.src = 'https://unpkg.com/jszip@3.10.1/dist/jszip.min.js';
 
-    document.currentScript.after(s);
+    s.async = true;
+
+    document.head.appendChild(s);
 
   }
 
+})();
+
 </script>
-  if (typeof JSZip === 'undefined') {
-    var s = document.createElement('script');
-    s.src = 'https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Funpkg.com%2Fjszip%403.10.1%2Fdist%2Fjszip.min.js&data=05%7C02%7CAWlikins%40rjobrien.com%7Cad750e0c2f9d40c5001408ddfa97c04c%7C96e17d10a58f4efcacefbe3521190113%7C0%7C0%7C638942251916772734%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C4000%7C%7C%7C&sdata=Hf0CL2RtO9wCtg4X%2BScInMihf7hooAIHarGsXq5TaRQ%3D&reserved=0';
-    document.currentScript.after(s);
-  }
-</script>
+
+
 
 <script>
+
   // ----- SEARCH (independent; always runs) -----
+
   (function(){
+
     var input = document.getElementById('q');
+
     if(!input) return;
+
     var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+
     input.addEventListener('input', function(){
+
       var term = (input.value || '').toLowerCase();
+
       cards.forEach(function(card){
+
         var txt = card.textContent.toLowerCase();
+
         card.style.display = term && !txt.includes(term) ? 'none' : '';
+
       });
+
     });
+
   })();
 
+
+
   // ----- DOWNLOAD ALL (safe even if JSZip fails) -----
+
   (function(){
+
     var btn = document.getElementById('zipAll');
+
     var progressEl = document.getElementById('progress');
+
     if(!btn) return;
 
+
+
     var files = [
+
       'The_Book_of_Living_Weapons_Complete.pdf',
+
       'TheScrollOfSacredHealth.pdf',
+
       'Shivving_Science_Complete.pdf',
+
       'Regenerative_AI_Consciousness_Complete_Edition.pdf',
+
       'The_Flameborn_School_Complete.pdf',
+
       'The_Apocryphon_of_Saint_Phartan.pdf'
+
     ];
+
+
 
     function setProgress(msg){ if(progressEl) progressEl.textContent = msg; }
 
+
+
     async function downloadAll(){
-      // If JSZip still not available, tell the user but don’t crash.
+
       if (typeof JSZip === 'undefined') {
+
         setProgress('Zip engine missing. Try refresh.');
+
         return;
+
       }
+
       btn.disabled = true;
+
       setProgress('Preparing…');
+
       try{
+
         var zip = new JSZip();
+
         var i = 0;
+
         for (const path of files){
+
           setProgress('Fetching ' + (++i) + '/' + files.length + ': ' + path);
+
           const res = await fetch(path, {cache:'no-store'});
+
           if(!res.ok) throw new Error('Fetch failed (' + res.status + ') for ' + path);
+
           const blob = await res.blob();
+
           zip.file(path, blob);
+
         }
+
         setProgress('Zipping…');
+
         const content = await zip.generateAsync({type:'blob'});
+
         const a = document.createElement('a');
+
         a.href = URL.createObjectURL(content);
+
         a.download = 'Flame_Library_All.zip';
+
         document.body.appendChild(a);
+
         a.click();
+
         a.remove();
+
         setProgress('Done.');
+
         setTimeout(function(){ setProgress(''); }, 3000);
+
       }catch(err){
+
         setProgress('Error: ' + err.message);
+
         console.error(err);
+
       }finally{
+
         btn.disabled = false;
+
       }
+
     }
 
+
+
     btn.addEventListener('click', downloadAll);
+
   })();
+
 </script>
+
 </body>
+
 </html>
