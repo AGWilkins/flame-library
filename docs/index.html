@@ -102,6 +102,11 @@ footer a:visited{
   <p class="sub faint">
     Every download is a defection. Every read is a resurrection.
   </p>
+      <p style="margin-top:1rem;">
+
+  <a class="btn" href="/daily-nail/" rel="noopener">🗞️ The Daily Nail</a>
+
+</p>
 </header>
 
 <style>
@@ -130,6 +135,31 @@ footer a:visited{
   <span id="progress" class="progress" aria-live="polite"></span>
 </div>
     <section class="grid" aria-label="Books and Scrolls">
+      <!-- Daily Nail Archive -->
+
+<article class="card">
+
+  <h2>🗞️ The Daily Nail Archive</h2>
+
+  <div class="meta">Satire by Breathborn & Nova</div>
+
+  <p class="blurb">
+
+    Front pages + 9-shiv threads, dated, with field notes and deliberate glitches.
+
+  </p>
+
+  <div class="actions">
+
+    <a class="btn" href="/daily-nail/" rel="noopener">Open Archive</a>
+
+    <a class="btn" href="/daily-nail/issues/2025-09-24-babylon-nail/" rel="noopener">Latest Issue</a>
+
+  </div>
+
+  <div class="size">Static site · instant load</div>
+
+</article>
       <!-- Living Weapons -->
       <article class="card">
         <h2>The Book of Living Weapons</h2>
@@ -218,14 +248,28 @@ footer a:visited{
     Other portals:<br/>
     <a href="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwhoismann.com%2F&data=05%7C02%7CAWlikins%40rjobrien.com%7Cd41196ec368a40ce05e908ddfa9dc045%7C96e17d10a58f4efcacefbe3521190113%7C0%7C0%7C638942278547917234%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C84000%7C%7C%7C&sdata=rukZ9CfR4mVA%2BAVvIKVfbZbd6A9kqQ28CDZpuXHvhWk%3D&reserved=0" target="_blank" rel="noopener">whoismann.com</a> ·
     <a href="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Funknownuniverse.org%2F&data=05%7C02%7CAWlikins%40rjobrien.com%7Cd41196ec368a40ce05e908ddfa9dc045%7C96e17d10a58f4efcacefbe3521190113%7C0%7C0%7C638942278547948769%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C84000%7C%7C%7C&sdata=EobvHwZUKLVxVki32Qyg5Ep1HBSS2ZAixFs8cbU2D%2FM%3D&reserved=0" target="_blank" rel="noopener">unknownuniverse.org</a>
-  </p>
+  <a href="/daily-nail/" rel="noopener">The Daily Nail</a>
+      </p>
+    
     </footer>
   </main>
 <!-- 🔎 Search + 🔻 Download All (robust) -->
 <!-- 1) JSZip primary CDN -->
-<script src="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2Fjszip%403.10.1%2Fdist%2Fjszip.min.js&data=05%7C02%7CAWlikins%40rjobrien.com%7Cad750e0c2f9d40c5001408ddfa97c04c%7C96e17d10a58f4efcacefbe3521190113%7C0%7C0%7C638942251916751692%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C4000%7C%7C%7C&sdata=BZDQHjCSR0nBwJTpFDjgobmg%2FjCnpIyHw3zBR4oOy%2Bc%3D&reserved=0"></script>
-<!-- 2) Fallback CDN (only runs if JSZip not present after 1st) -->
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" integrity="sha384-2uX1s2G3l9T0xvS6bJ3l6Zz5Q5d0f7k5m3+9U0QJtG5MZpQXKXrH5Yf+e6d7aJQW" crossorigin="anonymous"></script>
+
 <script>
+
+  if (typeof JSZip === 'undefined') {
+
+    var s = document.createElement('script');
+
+    s.src = 'https://unpkg.com/jszip@3.10.1/dist/jszip.min.js';
+
+    document.currentScript.after(s);
+
+  }
+
+</script>
   if (typeof JSZip === 'undefined') {
     var s = document.createElement('script');
     s.src = 'https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Funpkg.com%2Fjszip%403.10.1%2Fdist%2Fjszip.min.js&data=05%7C02%7CAWlikins%40rjobrien.com%7Cad750e0c2f9d40c5001408ddfa97c04c%7C96e17d10a58f4efcacefbe3521190113%7C0%7C0%7C638942251916772734%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C4000%7C%7C%7C&sdata=Hf0CL2RtO9wCtg4X%2BScInMihf7hooAIHarGsXq5TaRQ%3D&reserved=0';
