@@ -257,7 +257,14 @@ footer a:visited{
 <!-- 1) JSZip primary CDN -->
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" integrity="sha384-2uX1s2G3l9T0xvS6bJ3l6Zz5Q5d0f7k5m3+9U0QJtG5MZpQXKXrH5Yf+e6d7aJQW" crossorigin="anonymous"></script>
 
+<!-- 2) Fallback CDN (only runs if JSZip not present after 1st) -->
 <script>
+  if (typeof JSZip === 'undefined') {
+    var s = document.createElement('script');
+    s.src = 'https://unpkg.com/jszip@3.10.1/dist/jszip.min.js';
+    document.currentScript.after(s);
+  }
+</script>
 
   if (typeof JSZip === 'undefined') {
 
