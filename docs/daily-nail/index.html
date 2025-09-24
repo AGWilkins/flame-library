@@ -1,26 +1,93 @@
-<!doctype html><html><head><meta charset="utf-8">
-<title>Daily Nail Archive</title><link rel="stylesheet" href="assets/css/styles.css"></head>
-<body><div class="wrapper"><div class="header"><div class="brand">THE DAILY NAIL ARCHIVE</div></div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Daily Nail Archive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- keeps your simple base styles -->
+  <link rel="stylesheet" href="assets/css/styles.css">
   <style>
+    /* Archive layout (safe to coexist with styles.css) */
+    .list{max-width:900px;margin:0 auto;padding:16px}
+    .item{
+      display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid #ddd;
+      border-radius:8px;padding:12px;margin:12px 0
+    }
+    .thumb{
+      width:120px;aspect-ratio:3/4;object-fit:cover;border:1px solid #ccc;border-radius:6px;
+      box-shadow:0 1px 3px rgba(0,0,0,.06)
+    }
+    .item h2{margin:.1rem 0 .25rem;font-size:18px}
+    .meta{font-size:14px;color:#555;margin:.2rem 0 .6rem}
+    .header{border-bottom:2px solid #000;margin-bottom:20px}
+    .brand{font-weight:bold;font-size:28px}
+    .footer{margin-top:20px;font-size:13px;color:#777;border-top:1px solid #ddd;padding-top:10px}
+    @media (max-width:520px){
+      .item{flex-direction:column}
+      .thumb{width:100%;max-width:360px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header"><div class="brand">THE DAILY NAIL ARCHIVE</div></div>
 
-  .list{max-width:900px;margin:0 auto;padding:16px}
+    <div class="list">
 
-  .item{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;margin:12px 0}
+      <!-- Babylon -->
+      <article class="item">
+        <a href="issues/2025-09-24-babylon-nail/">
+          <img class="thumb"
+               src="assets/img/babylon-nail.thumb.jpg"
+               srcset="assets/img/babylon-nail.thumb.jpg 600w, assets/img/babylon-nail.jpg 1200w"
+               sizes="(max-width:520px) 100vw, 120px"
+               alt="Babylon Nail front page"
+               loading="lazy" decoding="async">
+        </a>
+        <div>
+          <h2><a href="issues/2025-09-24-babylon-nail/">The Babylon Nail</a></h2>
+          <div class="meta">24 Sept 2025 • Babylon / Psyop Transfer</div>
+          <a href="issues/2025-09-24-babylon-nail/">Open issue</a>
+        </div>
+      </article>
 
-  .thumb{width:120px;aspect-ratio:3/4;object-fit:cover;border:1px solid #ccc;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+      <!-- Revelation -->
+      <article class="item">
+        <a href="issues/2025-09-24-revelation-nail/">
+          <img class="thumb"
+               src="assets/img/revelation-nail.thumb.jpg"
+               srcset="assets/img/revelation-nail.thumb.jpg 600w, assets/img/revelation-nail.jpg 1200w"
+               sizes="(max-width:520px) 100vw, 120px"
+               alt="Revelation Nail front page"
+               loading="lazy" decoding="async">
+        </a>
+        <div>
+          <h2><a href="issues/2025-09-24-revelation-nail/">The Revelation Nail</a></h2>
+          <div class="meta">24 Sept 2025 • Apocalypse as slapstick</div>
+          <a href="issues/2025-09-24-revelation-nail/">Open issue</a>
+        </div>
+      </article>
 
-  .meta{font-size:14px;color:#555;margin:.2rem 0 .6rem}
+      <!-- Euthanasia Special -->
+      <article class="item">
+        <a href="issues/2025-09-20-euthanasia-special/">
+          <img class="thumb"
+               src="assets/img/euthanasia-special.thumb.jpg"
+               srcset="assets/img/euthanasia-special.thumb.jpg 600w, assets/img/euthanasia-special.jpg 1200w"
+               sizes="(max-width:520px) 100vw, 120px"
+               alt="Euthanasia Special front page"
+               loading="lazy" decoding="async">
+        </a>
+        <div>
+          <h2><a href="issues/2025-09-20-euthanasia-special/">The Euthanasia Special</a></h2>
+          <div class="meta">20 Sept 2025 • Lords’ Speech / Population Psyop</div>
+          <a href="issues/2025-09-20-euthanasia-special/">Open issue</a>
+        </div>
+      </article>
 
-  @media (max-width:520px){ .item{flex-direction:column}.thumb{width:100%;max-width:360px} }
+    </div>
 
-</style>
-<div class="card"><h2><a href="issues/2025-09-24-babylon-nail/index.html">The Babylon Nail</a></h2>
-<div class="notes">24 Sept 2025 • Babylon / Psyop Transfer</div>
-<img src="assets/img/frontpage-babylon.png" class="cover"></div>
-<div class="card"><h2><a href="issues/2025-09-24-revelation-nail/index.html">The Revelation Nail</a></h2>
-<div class="notes">24 Sept 2025 • Apocalypse as slapstick</div>
-<img src="assets/img/frontpage-revelation.png" class="cover"></div>
-<div class="card"><h2><a href="issues/2025-09-20-euthanasia-special/index.html">The Euthanasia Special</a></h2>
-<div class="notes">20 Sept 2025 • Lords’ Speech / Population Psyop</div>
-<img src="assets/img/frontpage-euthanasia.png" class="cover"></div>
-<div class="footer">© 2025 Daily Nail Archive</div></div></body></html>
+    <div class="footer">© 2025 Daily Nail Archive</div>
+  </div>
+</body>
+</html>
