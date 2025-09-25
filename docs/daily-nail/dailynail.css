@@ -42,8 +42,11 @@ body {
 
 .nail-issue img {
   width: 100%;
+  height: 450px;          /* uniform thumbnail height */
+  object-fit: cover;      /* crops excess but keeps aspect ratio */
   display: block;
 }
+
 /* Link colours — override the garish defaults */ a {
   color: #e4e0d9;          /* soft parchment white */
   text-decoration: none;
