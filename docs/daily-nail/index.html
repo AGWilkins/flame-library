@@ -4,32 +4,22 @@
   <meta charset="utf-8">
   <title>Daily Nail Archive</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- keeps your simple base styles -->
+
+  <!-- Base + archive styles -->
   <link rel="stylesheet" href="assets/css/styles.css">
-<link rel="stylesheet" href="dailynail.css">
-</head>
-  <!-- Lightbox overlay -->
-<div id="lightbox" aria-hidden="true">
-  <button class="lb-btn lb-close" aria-label="Close">&times;</button>
-  <button class="lb-btn lb-prev" aria-label="Previous">&#10094;</button>
-  <img id="lb-image" alt="">
-  <div class="lb-caption" id="lb-caption"></div>
-  <button class="lb-btn lb-next" aria-label="Next">&#10095;</button>
-</div>
-
-<script src="dailynail.js"></script>
-</body>
-</html>
-
-<body>
+  <link rel="stylesheet" href="dailynail.css"> </head> <body>
   <div class="wrapper">
-    <div class="header"><div class="brand">THE DAILY NAIL ARCHIVE</div></div>
+    <header class="header">
+      <div class="brand">THE DAILY NAIL ARCHIVE</div>
+    </header>
 
-    <div class="list">
-
+    <main class="list" role="list">
       <!-- Babylon -->
-      <article class="item">
-        <a href="issues/2025-09-24-babylon-nail/">
+      <article class="item" role="listitem">
+        <!-- Thumbnail opens lightbox to full image -->
+        <a class="nail-link"
+           href="assets/img/babylon-nail.jpg"
+           data-caption="The Daily Nail — 24 Sept 2025 • The Babylon Nail">
           <img class="thumb"
                src="assets/img/babylon-nail.thumb.jpg"
                srcset="assets/img/babylon-nail.thumb.jpg 600w, assets/img/babylon-nail.jpg 1200w"
@@ -45,8 +35,10 @@
       </article>
 
       <!-- Revelation -->
-      <article class="item">
-        <a href="issues/2025-09-24-revelation-nail/">
+      <article class="item" role="listitem">
+        <a class="nail-link"
+           href="assets/img/revelation-nail.jpg"
+           data-caption="The Daily Nail — 23 Sept 2025 • The Revelation Nail">
           <img class="thumb"
                src="assets/img/revelation-nail.thumb.jpg"
                srcset="assets/img/revelation-nail.thumb.jpg 600w, assets/img/revelation-nail.jpg 1200w"
@@ -62,8 +54,10 @@
       </article>
 
       <!-- Euthanasia Special -->
-      <article class="item">
-        <a href="issues/2025-09-20-euthanasia-special/">
+      <article class="item" role="listitem">
+        <a class="nail-link"
+           href="assets/img/euthanasia-special.jpg"
+           data-caption="The Daily Nail — 22 Sept 2025 • The Euthanasia Special">
           <img class="thumb"
                src="assets/img/euthanasia-special.thumb.jpg"
                srcset="assets/img/euthanasia-special.thumb.jpg 600w, assets/img/euthanasia-special.jpg 1200w"
@@ -78,9 +72,11 @@
         </div>
       </article>
 
-        <!-- Definitely Not The Vaxx-->
-      <article class="item">
-        <a href="issues/2025-07-29-Not-Vaxx/">
+      <!-- Definitely Not The Vaxx -->
+      <article class="item" role="listitem">
+        <a class="nail-link"
+           href="assets/img/not-vaxx.jpg"
+           data-caption="The Daily Nail — 29 July 2025 • Definitely Not The Vaxx">
           <img class="thumb"
                src="assets/img/not-vaxx.thumb.jpg"
                srcset="assets/img/not-vaxx.thumb.jpg 600w, assets/img/not-vaxx.jpg 1200w"
@@ -94,10 +90,21 @@
           <a href="issues/2025-07-29-Not-Vaxx/">Open issue</a>
         </div>
       </article>
+    </main>
 
-    </div>
-
-    <div class="footer">© 2025 Daily Nail Archive</div>
+    <footer class="footer">© 2025 Daily Nail Archive</footer>
   </div>
+
+  <!-- Lightbox overlay (kept at end of body) -->
+  <div id="lightbox" aria-hidden="true">
+    <button class="lb-btn lb-close" aria-label="Close">&times;</button>
+    <button class="lb-btn lb-prev" aria-label="Previous">&#10094;</button>
+    <img id="lb-image" alt="">
+    <div class="lb-caption" id="lb-caption"></div>
+    <button class="lb-btn lb-next" aria-label="Next">&#10095;</button>
+  </div>
+
+  <!-- Lightbox logic -->
+  <script src="dailynail.js"></script>
 </body>
 </html>
