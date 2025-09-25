@@ -44,3 +44,20 @@ body {
   width: 100%;
   display: block;
 }
+/* Link colours — override the garish defaults */ a {
+  color: #e4e0d9;          /* soft parchment white */
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ff4444;          /* flame red on hover */
+  text-decoration: underline;
+}
+
+.nail-meta a {
+  color: #f5f5f5;          /* keep links inside meta bars light */
+}
+
+.nail-meta a:hover {
+  color: #ffcc00;          /* golden highlight hover in meta strips */
+}
