@@ -301,6 +301,6 @@ box-shadow: var(--shadow);
 .about .avatar{
 width: 160px; /* a bit bigger on desktop */
 height: 160px;
-object-position: 50% 15%;
+object-position: 50% 5%;
 }
 }
