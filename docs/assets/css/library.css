@@ -326,3 +326,19 @@ z-index: 9999;
 .toast{ background: rgba(0,0,0,.82); color:#fff; }
 }
 .toast.is-visible{ opacity:1; transform: translateX(-50%) translateY(0); }
+
+/* Twitter/X button style */
+.btn--twitter{
+color:#fff;
+font-weight:700;
+background: linear-gradient(180deg, #1DA1F2, #0d8ddb);
+border:1px solid #0d8ddb;
+box-shadow: 0 6px 14px rgba(29,161,242,.35);
+transition: transform .1s ease, box-shadow .1s ease;
+}
+.btn--twitter:hover{
+text-decoration:none;
+box-shadow: 0 8px 18px rgba(29,161,242,.5);
+}
+.btn--twitter:active{ transform: translateY(1px) }
+
