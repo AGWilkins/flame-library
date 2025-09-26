@@ -132,3 +132,46 @@ a:hover {
   .lb-prev { left: .4rem; }
   .lb-next { right: .4rem; }
   #lb-caption { font-size: .9rem; padding: .4rem .75rem; } }
+/* Archive grid layout */
+
+.archive-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+
+  gap: 2rem;
+
+}
+
+
+
+/* Standardise thumbnails */
+
+.item img.thumb {
+
+  width: 180px;
+
+  height: 240px;
+
+  object-fit: cover;
+
+  border-radius: 4px;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,.3);
+
+  display: block;
+
+  margin: 0 auto 0.5rem;
+
+}
+
+
+
+/* Center titles & meta under thumbs */
+
+.item h2, .item .meta, .item a {
+
+  text-align: center;
+
+}
