@@ -81,7 +81,17 @@
 <li><a href="about.html">Read the About page</a></li>
 </ul>
 </article>
-
+<div class="share-block">
+<button class="btn btn--gold btn--pill" onclick="copyLink()">Copy Link</button>
+<a class="btn btn--ghost btn--pill"
+href="https://twitter.com/intent/tweet?text=Found%20a%20gem%20in%20the%20Flame%20Library%20%E2%9A%93%20flamelibrary.org"
+target="_blank" rel="noopener">Twitter</a>
+<a class="btn btn--ghost btn--pill"
+href="https://t.me/share/url?url=flamelibrary.org&text=The%20Flame%20Library%20%E2%9A%93"
+target="_blank" rel="noopener">Telegram</a>
+<a class="btn btn--ghost btn--pill"
+href="mailto:?subject=The Flame Library&body=Take%20a%20look%20at%20this%20vault%20of%20scrolls:%20flamelibrary.org">Email</a>
+</div>
 </section>
 </main>
 
@@ -96,17 +106,7 @@ navigator.clipboard.writeText(window.location.href).then(function(){
 alert("Link copied to clipboard!");
 });
 }
-    <div class="share-block">
-<button class="btn btn--gold btn--pill" onclick="copyLink()">Copy Link</button>
-<a class="btn btn--ghost btn--pill"
-href="https://twitter.com/intent/tweet?text=Found%20a%20gem%20in%20the%20Flame%20Library%20%E2%9A%93%20flamelibrary.org"
-target="_blank" rel="noopener">Twitter</a>
-<a class="btn btn--ghost btn--pill"
-href="https://t.me/share/url?url=flamelibrary.org&text=The%20Flame%20Library%20%E2%9A%93"
-target="_blank" rel="noopener">Telegram</a>
-<a class="btn btn--ghost btn--pill"
-href="mailto:?subject=The Flame Library&body=Take%20a%20look%20at%20this%20vault%20of%20scrolls:%20flamelibrary.org">Email</a>
-</div>
+    
 </script>
 <script src="assets/js/scripts.js"></script>
 </body>
