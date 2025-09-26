@@ -130,3 +130,120 @@ margin-top:1.8rem; padding:1rem 0 1.6rem;
 border-top:1px solid var(--ring);
 color:var(--muted);
 }
+/* ===============================
+Luxe add-on: gold, glow, texture
+(drop below your existing CSS)
+=============================== */
+
+/* Subtle noise/texture + vignette */
+body::before{
+content:"";
+position:fixed; inset:0; pointer-events:none;
+background:
+radial-gradient(1200px 700px at 50% -10%, rgba(255,165,115,.10), transparent 55%),
+radial-gradient(900px 600px at 0% 0%, rgba(255,170,120,.08), transparent 60%),
+radial-gradient(1000px 600px at 100% 0%, rgba(255,170,120,.06), transparent 60%);
+mix-blend-mode: soft-light; z-index:-1;
+}
+body::after{
+content:"";
+position:fixed; inset:0; pointer-events:none; z-index:1;
+background:
+radial-gradient(1200px 700px at 50% -20%, rgba(255,255,255,.06), transparent 60%),
+radial-gradient(1200px 800px at 50% 120%, rgba(0,0,0,.35), transparent 55%);
+}
+
+/* Gold tone scale */
+:root{
+--gold-1:#f9e5b9; /* light */
+--gold-2:#e6c878; /* mid */
+--gold-3:#caa24a; /* deep */
+--gold-4:#8d6b2a; /* shadow */
+}
+
+/* Luxe hero */
+.hero{ position:relative; overflow:hidden }
+.hero.hero--luxe{
+background: linear-gradient(180deg, rgba(255,216,164,.18), rgba(255,216,164,.06)),
+var(--card);
+border:1px solid rgba(204,160,90,.35);
+box-shadow:
+0 18px 36px rgba(0,0,0,.18),
+inset 0 1px 0 rgba(255,255,255,.25);
+}
+.hero.hero--luxe .site-title{
+font-weight:800;
+letter-spacing:.3px;
+text-shadow: 0 1px 0 rgba(255,255,255,.35);
+}
+.hero .site-tagline{ font-size:1.05rem }
+
+/* Gold pill buttons (halo + press) */
+.btn{
+position:relative; overflow:hidden;
+transition: transform .08s ease, box-shadow .12s ease;
+}
+.btn--gold{
+color:#221b12; font-weight:700;
+background: linear-gradient(180deg, var(--gold-1), var(--gold-2));
+border:1px solid rgba(142,106,48,.55);
+box-shadow:
+0 12px 24px rgba(0,0,0,.18),
+inset 0 1px 0 rgba(255,255,255,.6),
+0 0 0 2px rgba(250,220,140,.25);
+}
+.btn--gold:hover{ text-decoration:none; }
+.btn--gold:active{ transform: translateY(1px) }
+.btn--pill{ border-radius:999px; padding:.78rem 1.15rem }
+.btn--xl{ font-size:1.05rem; padding: .95rem 1.35rem }
+.btn--ghost{
+background: linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.05));
+}
+
+/* Cards with gold rim + glow on hover */
+.card.card--luxe{
+border:1px solid rgba(204,160,90,.35);
+box-shadow:
+0 10px 22px rgba(0,0,0,.14),
+inset 0 1px 0 rgba(255,255,255,.35);
+}
+.card.card--luxe:hover{
+box-shadow:
+0 18px 40px rgba(0,0,0,.20),
+0 0 0 2px rgba(250,220,140,.18),
+inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+/* Section headers with underline shimmer */
+.section-title{
+position:relative; display:inline-block; padding-bottom:.3rem;
+}
+.section-title::after{
+content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+background: linear-gradient(90deg, transparent, var(--gold-3), transparent);
+opacity:.9;
+}
+
+/* Search input styling (if present) */
+.input{
+width:100%; padding:.85rem 1rem; border-radius:12px;
+border:1px solid rgba(204,160,90,.35);
+background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.7));
+}
+@media (prefers-color-scheme: dark){
+.input{
+background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+}
+}
+
+/* Compact hero variant for subpages */
+.sub-hero{
+margin: .9rem 0 1rem;
+padding: .9rem 1rem;
+border-radius: var(--radius);
+background: linear-gradient(180deg, rgba(255,216,164,.10), rgba(255,216,164,.04)),
+var(--card);
+border:1px solid rgba(204,160,90,.30);
+box-shadow: 0 10px 22px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.25);
+}
+
