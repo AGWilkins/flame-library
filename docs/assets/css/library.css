@@ -342,3 +342,10 @@ box-shadow: 0 8px 18px rgba(29,161,242,.5);
 }
 .btn--twitter:active{ transform: translateY(1px) }
 
+html[data-theme="dark"] {
+--bg:#0e0e10;
+--ink:#e9e9ea;
+--card:#141416;
+--accent:#ff8048;
+/* … keep your other vars here … */
+}
