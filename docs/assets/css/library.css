@@ -263,3 +263,26 @@ padding-top: 0; /* reset aspect */
 height: 70vh; /* take up 70% of viewport height */
 }
 }
+/* Inline PDF on larger screens */
+.pdf-embed {
+position: relative;
+width: 100%;
+height: 80vh;
+border: 1px solid rgba(0,0,0,.08);
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 8px 20px rgba(0,0,0,.12);
+margin: 1rem 0;
+}
+.pdf-embed iframe {
+position: absolute; inset: 0;
+width: 100%; height: 100%; border: 0;
+}
+
+/* Mobile: hide embed, show "Open Full-Screen" */
+.pdf-open-mobile { display: none; text-align: center; margin: .5rem 0 1rem; }
+
+@media (max-width: 600px){
+.pdf-embed { display: none; } /* iOS iframe is flaky—hide it */
+.pdf-open-mobile { display: block; }
+}
