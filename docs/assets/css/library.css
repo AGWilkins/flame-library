@@ -310,3 +310,19 @@ display:flex;
 flex-wrap:wrap;
 gap:.6rem;
 }
+/* Tiny toast */
+.toast{
+position: fixed;
+left: 50%; bottom: 18px; transform: translateX(-50%) translateY(20px);
+padding: .55rem .8rem; border-radius: 10px;
+background: rgba(20,20,20,.85);
+color: #fff; font-size: .95rem;
+border: 1px solid rgba(255,255,255,.18);
+opacity: 0; pointer-events: none;
+transition: transform .15s ease, opacity .15s ease;
+z-index: 9999;
+}
+@media (prefers-color-scheme: light){
+.toast{ background: rgba(0,0,0,.82); color:#fff; }
+}
+.toast.is-visible{ opacity:1; transform: translateX(-50%) translateY(0); }
