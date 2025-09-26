@@ -236,16 +236,6 @@ background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)
 }
 }
 
-/* Compact hero variant for subpages */
-.sub-hero{
-margin: .9rem 0 1rem;
-padding: .9rem 1rem;
-border-radius: var(--radius);
-background: linear-gradient(180deg, rgba(255,216,164,.10), rgba(255,216,164,.04)),
-var(--card);
-border:1px solid rgba(204,160,90,.30);
-box-shadow: 0 10px 22px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.25);
-}
 /* PDF Embed wrapper */
 .pdf-embed {
 position: relative;
@@ -273,4 +263,3 @@ padding-top: 0; /* reset aspect */
 height: 70vh; /* take up 70% of viewport height */
 }
 }
-
