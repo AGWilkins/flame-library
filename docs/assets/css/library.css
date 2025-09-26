@@ -349,3 +349,12 @@ html[data-theme="dark"] {
 --accent:#ff8048;
 /* … keep your other vars here … */
 }
+/* Standardise Daily Nail thumbnails */
+.daily-nail-archive img {
+width: 180px; /* fixed width */
+height: 240px; /* fixed height */
+object-fit: cover; /* crop neatly without distortion */
+border-radius: 4px;
+box-shadow: 0 4px 12px rgba(0,0,0,.3);
+display: block;
+}
