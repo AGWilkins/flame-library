@@ -304,3 +304,9 @@ height: 160px;
 object-position: 50% 0%;
 }
 }
+.share-block{
+margin:1.2rem 0;
+display:flex;
+flex-wrap:wrap;
+gap:.6rem;
+}
